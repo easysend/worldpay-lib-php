@@ -17,13 +17,14 @@ $worldpay->disableSSLCheck(true);
 
 $worldpayOrderCode = $_POST['orderCode'];
 
-include('header.php');
+include("header.php");
 
 // Try catch
 try {
-    // Refund the order using the Worldpay order code
-    $worldpay->refundOrder($worldpayOrderCode);
-    echo 'Order <span id="order-code">'.$worldpayOrderCode.'</span> has been refunded!';
+    // Cancel the authorized order using the Worldpay order code
+    $worldpay->cancelAuthorizedOrder($worldpayOrderCode);
+    echo 'Authorized order <span id="order-code">'.$worldpayOrderCode.'</span>
+        has been cancelled';
 } catch (WorldpayException $e) {
     // Worldpay has thrown an exception
     echo 'Error code: ' . $e->getCustomCode() . '<br/>

@@ -1,9 +1,13 @@
+<?php
+namespace Worldpay;
+?>
 
 <?php
 /**
- * PHP library version: v1.7
+ * PHP library version: 2.0.0
  */
-require_once('../lib/Worldpay.php');
+
+require_once('../init.php');
 
 // Initialise Worldpay class with your SERVICE KEY
 $worldpay = new Worldpay("your-service-key");
@@ -26,11 +30,9 @@ try {
     echo '<p>Masked Card Number: <span id="masked-card-number">' . $cardDetails['maskedCardNumber'] . '</span></p>';
     echo '<pre>' . print_r($cardDetails, true). '</pre>';
 
-} catch (WorldpayException $e) { // PHP 5.3+
-    echo 'Error code: ' . $e->getCustomCode() . '<br/> 
-    HTTP status code:' . $e->getHttpStatusCode() . '<br/> 
+} catch (WorldpayException $e) {
+    echo 'Error code: ' . $e->getCustomCode() . '<br/>
+    HTTP status code:' . $e->getHttpStatusCode() . '<br/>
     Error description: ' . $e->getDescription()  . ' <br/>
     Error message: ' . $e->getMessage();
-} catch (Exception $e) {  // PHP 5.2 
-    echo 'Error message: '. $e->getMessage();
 }

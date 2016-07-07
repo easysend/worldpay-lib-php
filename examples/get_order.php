@@ -6,6 +6,7 @@ namespace Worldpay;
 /**
  * PHP library version: 2.0.0
  */
+
 require_once('../init.php');
 
 // Initialise Worldpay class with your SERVICE KEY
@@ -15,15 +16,14 @@ $worldpay = new Worldpay("your-service-key");
 // DONT USE IN PRODUCTION
 $worldpay->disableSSLCheck(true);
 
-$worldpayOrderCode = $_POST['orderCode'];
+$orderCode = $_POST['orderCode'];
 
 include('header.php');
 
 // Try catch
 try {
-    // Refund the order using the Worldpay order code
-    $worldpay->refundOrder($worldpayOrderCode);
-    echo 'Order <span id="order-code">'.$worldpayOrderCode.'</span> has been refunded!';
+    $response = $worldpay->getOrder($orderCode);
+    echo '<pre>' . print_r($response, true). '</pre>';
 } catch (WorldpayException $e) {
     // Worldpay has thrown an exception
     echo 'Error code: ' . $e->getCustomCode() . '<br/>
